@@ -24,7 +24,7 @@ export default function Hero({ pageInfo }: Props) {
   return (
     <div className="h-screen flex-col flex space-y-8 items-center justify-center text-center overflow-hidden">
       <BackGroundCircles />
-      <div className="shadow w-32 h-32 bg-black relative rounded-full mx-auto object-cover" />
+      {/* <div className="shadow w-32 h-32 bg-black relative rounded-full mx-auto object-cover" /> */}
       <div className="z-20">
         <h2 className="text-base uppercase text-gray-400 pb-3 font-light tracking-[15px]">
           {pageInfo.role}
