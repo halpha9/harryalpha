@@ -1,3 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=VT323&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+svg text,
+.g2-tooltip div,
+.g2-tooltip span {
+  font-family: "Poppins" !important;
+}
+
+.gradient-animation {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
