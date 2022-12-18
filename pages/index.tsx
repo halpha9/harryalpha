@@ -1,15 +1,12 @@
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import About from "../components/About";
 import Experience from "../components/Experience";
-import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Projects from "../components/Project";
 import ProjectModal from "../components/Project/ProjectModal";
 import Skills from "../components/Skills";
 import { useApp } from "../providers/app";
-import { getWindowDimensions } from "../utils/window";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
@@ -29,6 +26,7 @@ import {
   fetchSkills,
   fetchSocials,
 } from "../utils/fetcher";
+import Header from "../components/Header";
 
 type Props = {
   pageInfo: PageInfoSanity;
@@ -47,7 +45,6 @@ export default function Home({
 }: Props) {
   const { selected } = useApp();
 
-  console.log(experience);
   return (
     <AnimatePresence mode="wait">
       <Head>
