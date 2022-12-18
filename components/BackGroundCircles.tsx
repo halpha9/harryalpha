@@ -17,7 +17,7 @@ function BackGroundCircles({}: Props) {
       <div className="absolute border border-gray-600 rounded-full w-[200px] h-[200px] mt-52 animate-ping" />
       <div className="absolute border border-gray-600 rounded-full w-[300px] h-[300px] mt-52 animate-ping" />
       <div className="absolute border border-gray-600 rounded-full w-[500px] h-[500px] mt-52 animate-ping" />
-      <div className="absolute border border-orange-300 opacity-10 rounded-full w-[700px] h-[700px] mt-52 animate-pulse" />
+      <div className="absolute border border-blue-900 opacity-10 rounded-full w-[700px] h-[700px] mt-52 animate-pulse" />
       <div className="absolute border border-gray-600 rounded-full w-[800px] h-[800px] mt-52 animate-ping" />
     </motion.div>
   );

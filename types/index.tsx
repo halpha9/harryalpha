@@ -4,15 +4,15 @@ export interface Skill {
   name: any;
   active: boolean;
 }
-
 export interface Project {
   id: string;
-  skills: any[];
+  skills: string[];
   name: string;
   description: string;
-  tutorial: boolean;
   image: string;
   github: string;
+  link: string;
+  summaryPoints: string[];
 }
 
 export interface Experience {
@@ -20,9 +20,7 @@ export interface Experience {
   company: string;
   jobTitle: string;
   time: string;
-  skills: Skills[];
+  skills: string[];
   description: string;
-  image: string;
-  tutorial: boolean;
   summaryPoints: string[];
 }

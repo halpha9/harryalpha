@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import About from "../components/About";
 import Experience from "../components/Experience";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Projects from "../components/Project";
@@ -12,83 +11,125 @@ import Skills from "../components/Skills";
 import { useApp } from "../providers/app";
 import { getWindowDimensions } from "../utils/window";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { AiFillHome } from "react-icons/ai";
+import Contact from "../components/Contact";
+import {
+  ExperienceSanity,
+  PageInfoSanity,
+  ProjectSanity,
+  SkillsSanity,
+  SocialsSanity,
+} from "../types/sanity";
+import { GetStaticProps } from "next";
+import {
+  fetchExperience,
+  fetchPageInfo,
+  fetchProjects,
+  fetchSkills,
+  fetchSocials,
+} from "../utils/fetcher";
 
-export default function Home() {
-  const [state, setState] = useState({
-    loading: true,
-    windowDimensions: { width: 0, height: 0 },
-  });
+type Props = {
+  pageInfo: PageInfoSanity;
+  experience: ExperienceSanity[];
+  projects: ProjectSanity[];
+  skills: SkillsSanity[];
+  socials: SocialsSanity[];
+};
 
-  useEffect(() => {
-    setState({ ...state, windowDimensions: getWindowDimensions() });
-
-    const timer = setTimeout(() => {
-      setState({ ...state, loading: false });
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function Home({
+  pageInfo,
+  experience,
+  projects,
+  skills,
+  socials,
+}: Props) {
   const { selected } = useApp();
 
+  console.log(experience);
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <Head>
         <title>Harry Alpha</title>
       </Head>
-      {!state.loading ? (
-        <motion.div
-          initial={{ y: state.windowDimensions.height }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.7 }}
-          key="main"
-          className="relative"
-        >
-          <div className="dark:bg-[rgb(36,36,36)] text-white h-screen snap-y md:snap-mandatory overflow-scroll z-0">
-            <Header />
+      <motion.div
+        initial="initialState"
+        animate="animateState"
+        exit="exitState"
+        transition={{
+          duration: 0.75,
+        }}
+        variants={{
+          initialState: {
+            opacity: 0,
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+          },
+          animateState: {
+            opacity: 1,
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+          },
+          exitState: {
+            clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
+          },
+        }}
+        className="w-full min-h-screen relative"
+        key="main"
+      >
+        <div className="dark:bg-[rgb(36,36,36)] text-white h-screen snap-y md:snap-mandatory overflow-x-hidden z-0 overflow-y-scroll scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-blue-900/80">
+          <Header socials={socials} />
 
-            <section id="hero" className="snap-center">
-              <Hero />
-            </section>
+          <section id="main" className="snap-center">
+            <Hero pageInfo={pageInfo} />
+          </section>
 
-            <section id="about" className="snap-center">
-              <About />
-            </section>
+          <section id="about" className="snap-center">
+            <About pageInfo={pageInfo} />
+          </section>
 
-            <section id="experience" className="snap-center">
-              <Experience />
-            </section>
+          <section id="experience" className="snap-center">
+            <Experience experience={experience} />
+          </section>
 
-            <section id="skills" className="snap-center">
-              <Skills />
-            </section>
+          <section id="skills" className="snap-start">
+            <Skills skills={skills} />
+          </section>
 
-            <section id="projects" className="snap-start">
-              <Projects />
-              <Footer />
-            </section>
-            {selected && <ProjectModal id={selected} />}
-          </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          key="loadingScreen"
-          className="bg-black h-screen w-screen flex justify-center items-center"
-          exit={{ y: -state.windowDimensions.height }}
-          animate={{ y: 0 }}
-          initial={{ y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <h1 className="mb-2 font-mono text-4xl text-gray-100 md:text-6xl">
-            hi, I&apos;m <br className="block md:hidden" />
-            <span className="relative">
-              <span className="h-20 pt-2 overflow-x-hidden whitespace-nowrap text-brand-accent">
-                Harry <span className="text-3xl md:text-5xl">👋</span>
-              </span>
-              <span className="absolute -bottom-0 left-0 -top-1 inline-block bg-gray-900 w-full animate-type will-change"></span>
-            </span>
-          </h1>
-        </motion.div>
-      )}
+          <section id="projects" className="snap-start">
+            <Projects projects={projects} />
+          </section>
+          <section id="contact" className="snap-start">
+            <Contact pageInfo={pageInfo} />
+          </section>
+          {selected && <ProjectModal projects={projects} id={selected} />}
+
+          <Link href="#main">
+            <footer className="sticky bottom-5 w-full cursor-pointer">
+              <div className="flex items-center justify-center">
+                <AiFillHome className="w-10 h-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer opacity-30" />
+              </div>
+            </footer>
+          </Link>
+        </div>
+      </motion.div>
     </AnimatePresence>
   );
 }
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const pageInfo: PageInfoSanity = await fetchPageInfo();
+  const experience: ExperienceSanity[] = await fetchExperience();
+  const projects: ProjectSanity[] = await fetchProjects();
+  const socials: SocialsSanity[] = await fetchSocials();
+  const skills: SkillsSanity[] = await fetchSkills();
+  return {
+    props: {
+      pageInfo,
+      experience,
+      projects,
+      skills,
+      socials,
+    },
+    revalidate: 10,
+  };
+};

@@ -1,32 +1,23 @@
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
-type Props = {};
+import { SocialsSanity } from "../types/sanity";
+type Props = {
+  socials: SocialsSanity[];
+};
 
-export default function Header({}: Props) {
+export default function Header({ socials }: Props) {
   return (
-    <header className="p-5 flex items-start flex-row justify-between sticky top-0 max-w-7xl mx-auto z-20 xl:items-center">
+    <header className="p-5 px-8 flex items-start flex-row justify-between sticky top-0 max-w-7xl mx-auto z-20 xl:items-center">
       <motion.div
         initial={{ opacity: 0, x: -500, scale: 0.5 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 1 }}
         className="flex flex-row items-center"
       >
-        <SocialIcon
-          url="https://twitter.com/h_alph"
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        <SocialIcon
-          url="https://github.com/halpha9"
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        <SocialIcon
-          url="https://www.linkedin.com/in/harryalpha"
-          fgColor="gray"
-          bgColor="transparent"
-        />
+        {socials.map(({ url }, i) => (
+          <SocialIcon key={i} url={url} fgColor="gray" bgColor="transparent" />
+        ))}
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: 500, scale: 0.5 }}

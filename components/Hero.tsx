@@ -1,9 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { PageInfoSanity } from "../types/sanity";
 import BackGroundCircles from "./BackGroundCircles";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfoSanity;
+};
 
 const arr = [
   { name: "About", href: "#about" },
@@ -12,7 +15,7 @@ const arr = [
   { name: "Projects", href: "#projects" },
 ];
 
-export default function Hero({}: Props) {
+export default function Hero({ pageInfo }: Props) {
   const [text, count] = useTypewriter({
     words: ["Hi I'm Harry", "Developer", "bug-fixer.tsx"],
     loop: true,
@@ -24,7 +27,7 @@ export default function Hero({}: Props) {
       <div className="shadow w-32 h-32 bg-black relative rounded-full mx-auto object-cover" />
       <div className="z-20">
         <h2 className="text-base uppercase text-gray-400 pb-3 font-light tracking-[15px]">
-          Web Developer
+          {pageInfo.role}
         </h2>
         <h1 className="text-5xl lg:text-6xl font-semibold px-10">
           {text}

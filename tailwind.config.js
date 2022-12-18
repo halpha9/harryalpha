@@ -44,5 +44,5 @@ module.exports = {
       '"Noto Color Emoji"',
     ],
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
