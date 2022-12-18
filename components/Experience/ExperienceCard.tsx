@@ -17,6 +17,7 @@ export default function ExperienceCard({ experience }: Props) {
         </p>
         <div className="flex space-x-2 my-2 mt-4">
           {experience &&
+            experience.skills &&
             experience.skills.length > 0 &&
             experience.skills.map((skill) => {
               const Icon = (Icons as any)[skill!];
