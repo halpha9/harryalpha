@@ -28,7 +28,7 @@ import {
 } from "../utils/fetcher";
 import dynamic from "next/dynamic";
 
-const DynamicHeader = dynamic(() => import("../components/Header"), {
+const DynamicHeader = dynamic(() => import("../components/header"), {
   suspense: true,
 });
 
