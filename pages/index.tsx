@@ -26,7 +26,11 @@ import {
   fetchSkills,
   fetchSocials,
 } from "../utils/fetcher";
-import Header from "../components/Header";
+import dynamic from "next/dynamic";
+
+const DynamicHeader = dynamic(() => import("../components/header"), {
+  suspense: true,
+});
 
 type Props = {
   pageInfo: PageInfoSanity;
@@ -74,7 +78,7 @@ export default function Home({
         key="main"
       >
         <div className="dark:bg-[rgb(36,36,36)] text-white h-screen snap-y md:snap-mandatory overflow-x-hidden z-0 overflow-y-scroll scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-blue-900/80">
-          <Header socials={socials} />
+          <DynamicHeader socials={socials} />
 
           <section id="main" className="snap-center">
             <Hero pageInfo={pageInfo} />
