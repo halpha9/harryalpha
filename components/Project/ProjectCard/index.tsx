@@ -33,7 +33,7 @@ const ProjectCard: React.FC<Props> = ({
           viewport={{ once: true }}
           layoutId={`card-image-container-${id}`}
           src={image}
-          className="rounded-xl w-full h-fit object-contain"
+          className="rounded-xl w-8/12 h-fit object-contain"
           alt="Project image"
         />
       </div>
