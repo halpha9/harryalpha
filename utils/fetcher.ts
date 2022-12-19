@@ -7,10 +7,7 @@ import {
 } from "../types/sanity";
 
 // const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL!;
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_PRODUCTION_URL!
-    : "http://localhost:3000";
+const baseUrl = "http://localhost:3000";
 
 export const fetchSkills = async (): Promise<SkillsSanity[]> => {
   const response = await fetch(`${baseUrl}/api/getSkills`);
