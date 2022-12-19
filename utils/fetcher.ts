@@ -6,7 +6,7 @@ import {
   SocialsSanity,
 } from "../types/sanity";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL!;
 
 export const fetchSkills = async (): Promise<SkillsSanity[]> => {
   const response = await fetch(`${baseUrl}/api/getSkills`);
