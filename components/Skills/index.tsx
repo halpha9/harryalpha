@@ -7,6 +7,7 @@ import Skill from "./Skill";
 type Props = { skills: SkillsSanity[] };
 
 export default function Skills({ skills }: Props) {
+  console.log(skills);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,6 +27,7 @@ export default function Skills({ skills }: Props) {
         {skills &&
           skills.slice(0, skills.length / 2).map((skill, i) => {
             const Icon = (Icons as any)[skill.title!];
+
             return <Skill skill={skill} key={i} Icon={Icon} />;
           })}
         {skills &&

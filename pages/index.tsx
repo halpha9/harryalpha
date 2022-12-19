@@ -93,7 +93,7 @@ export default function Home({
           </section>
 
           <section id="skills" className="snap-start">
-            <Skills skills={skills} />
+            {skills && skills.length > 0 && <Skills skills={skills} />}
           </section>
 
           <section id="projects" className="snap-start">
@@ -131,6 +131,5 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       skills,
       socials,
     },
-    revalidate: 10,
   };
 };

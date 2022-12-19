@@ -36,14 +36,13 @@ const ProjectCard: React.FC<Props> = ({
           className="rounded-xl w-full h-fit object-contain"
           alt="Project image"
         />
-        {/* {hover && <Overlay id={id} github={github} />} */}
       </div>
 
       <div className="flex items-center justify-between w-full ">
         <div className="flex">
-          {skills.map((s, i) => (
-            <Skill index={i} key={i} name={s} />
-          ))}
+          {skills &&
+            skills.length > 0 &&
+            skills.map((s, i) => <Skill index={i} key={i} name={s} />)}
         </div>
         <motion.div
           layoutId={`project-buttons-${id}`}
