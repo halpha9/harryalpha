@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ProjectCard: React.FC<Props> = ({
-  project: { image, skills, name, id, github, summaryPoints },
+  project: { image, skills, name, id, github, summaryPoints, link },
 }) => {
   const [hover, setHover] = useState(false);
   const { setState } = useApp();
@@ -46,7 +46,6 @@ const ProjectCard: React.FC<Props> = ({
         </div>
         <motion.div
           layoutId={`project-buttons-${id}`}
-          onClick={() => setState((s) => ({ ...s, selected: id }))}
           transition={{
             duration: 0.25,
           }}
@@ -87,7 +86,7 @@ const ProjectCard: React.FC<Props> = ({
           </motion.a>
           <motion.a
             rel="noopener noreferrer"
-            href={github}
+            href={link}
             target="_blank"
             whileHover={{
               scale: [1, 0.85],
