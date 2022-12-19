@@ -23,7 +23,7 @@ const ProjectCard: React.FC<Props> = ({
           setHover(false);
         }, 8000);
       }}
-      className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
+      className="w-full flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
     >
       <div className="w-full h-fit">
         <motion.img
@@ -33,7 +33,7 @@ const ProjectCard: React.FC<Props> = ({
           viewport={{ once: true }}
           layoutId={`card-image-container-${id}`}
           src={image}
-          className="rounded-xl w-8/12 h-fit object-contain"
+          className="rounded-xl w-full h-fit object-contain"
           alt="Project image"
         />
       </div>

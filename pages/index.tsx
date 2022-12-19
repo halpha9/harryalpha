@@ -78,32 +78,38 @@ export default function Home({
         key="main"
       >
         <div className="dark:bg-[rgb(36,36,36)] text-white h-screen snap-y md:snap-mandatory overflow-x-hidden z-0 overflow-y-scroll scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-blue-900/80">
-          <DynamicHeader socials={socials} />
-
-          <section id="main" className="snap-center">
-            <Hero pageInfo={pageInfo} />
-          </section>
-
-          <section id="about" className="snap-center">
-            <About pageInfo={pageInfo} />
-          </section>
-
-          <section id="experience" className="snap-center">
-            <Experience experience={experience} />
-          </section>
-
+          {socials && socials.length > 0 && <DynamicHeader socials={socials} />}
+          {pageInfo && (
+            <section id="main" className="snap-center">
+              <Hero pageInfo={pageInfo} />
+            </section>
+          )}
+          {pageInfo && (
+            <section id="about" className="snap-center">
+              <About pageInfo={pageInfo} />
+            </section>
+          )}
+          {experience && experience.length > 0 && (
+            <section id="experience" className="snap-center">
+              <Experience experience={experience} />
+            </section>
+          )}
           <section id="skills" className="snap-start">
             {skills && skills.length > 0 && <Skills skills={skills} />}
           </section>
-
-          <section id="projects" className="snap-start">
-            <Projects projects={projects} />
-          </section>
-          <section id="contact" className="snap-start">
-            <Contact pageInfo={pageInfo} />
-          </section>
-          {selected && <ProjectModal projects={projects} id={selected} />}
-
+          {projects && projects.length > 0 && (
+            <section id="projects" className="snap-start">
+              <Projects projects={projects} />
+            </section>
+          )}
+          {pageInfo && (
+            <section id="contact" className="snap-start">
+              <Contact pageInfo={pageInfo} />
+            </section>
+          )}
+          {selected && projects && projects.length > 0 && (
+            <ProjectModal projects={projects} id={selected} />
+          )}
           <Link href="#main">
             <footer className="sticky bottom-5 w-full cursor-pointer">
               <div className="flex items-center justify-center">
@@ -125,11 +131,11 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const skills: SkillsSanity[] = await fetchSkills();
   return {
     props: {
-      pageInfo,
-      experience,
-      projects,
-      skills,
-      socials,
+      pageInfo: pageInfo || null,
+      experience: experience || null,
+      projects: projects || null,
+      skills: skills || null,
+      socials: socials || null,
     },
   };
 };
